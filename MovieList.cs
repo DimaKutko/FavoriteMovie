@@ -20,8 +20,6 @@ public class FavoriteList : MovieList
     public FavoriteList(String xml){
 
     }
-
-
 }
 
 public class SearchList : MovieList
