@@ -1,0 +1,12 @@
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie/bin/Debug/netcoreapp3.1/FavoriteMovie.deps.json
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie/bin/Debug/netcoreapp3.1/FavoriteMovie.runtimeconfig.json
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie/bin/Debug/netcoreapp3.1/FavoriteMovie.runtimeconfig.dev.json
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie/bin/Debug/netcoreapp3.1/FavoriteMovie.dll
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie/bin/Debug/netcoreapp3.1/FavoriteMovie.pdb
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie/obj/Debug/netcoreapp3.1/FavoriteMovie.csprojAssemblyReference.cache
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie/obj/Debug/netcoreapp3.1/FavoriteMovie.AssemblyInfoInputs.cache
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie/obj/Debug/netcoreapp3.1/FavoriteMovie.AssemblyInfo.cs
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie/obj/Debug/netcoreapp3.1/FavoriteMovie.csproj.CoreCompileInputs.cache
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie/obj/Debug/netcoreapp3.1/FavoriteMovie.dll
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie/obj/Debug/netcoreapp3.1/FavoriteMovie.pdb
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie/obj/Debug/netcoreapp3.1/FavoriteMovie.genruntimeconfig.cache

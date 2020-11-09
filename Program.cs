@@ -6,7 +6,15 @@ namespace FavoriteMovie
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            RestApiClient api = new RestApiClient();
+
+            String data = api.SerchAllMovie("Avatar");
+
+            SearchList movies = new SearchList(data);
+
+            movies.Print();
+
+            Console.ReadKey();
         }
     }
 }
