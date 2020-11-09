@@ -30,4 +30,69 @@ public class Menu {
         Console.SetCursorPosition( 3, Console.CursorTop + 1);
         Console.Write(item);
     }
+
+    public int Selector(int size)
+    {
+        Console.SetCursorPosition(0, 0);
+
+        PrintArrow();
+
+        size--;
+
+        bool run = true;
+        while (run)
+        {
+            switch (Console.ReadKey().Key)
+            {
+                case ConsoleKey.W:
+                case ConsoleKey.UpArrow:
+                    if (Console.CursorTop != 0)
+                    {
+                        PrintSpace();
+                        Console.SetCursorPosition(0, Console.CursorTop - 1);
+                        PrintArrow();
+                    }
+                    else
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop);
+                        PrintArrow();
+                    }
+                    break;
+                case ConsoleKey.S:
+                case ConsoleKey.DownArrow:
+                    if (Console.CursorTop != size)
+                    {
+                        PrintSpace();
+                        Console.SetCursorPosition(0, Console.CursorTop + 1);
+                        PrintArrow();
+                    }
+                    else
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop);
+                        PrintArrow();
+                    }
+                    break;
+                case ConsoleKey.Enter:
+                    run = false;
+                    break;
+                default:
+                    Console.SetCursorPosition(0, Console.CursorTop);
+                    PrintArrow();
+                    break;
+            }
+        }
+        return Console.CursorTop;
+    }
+
+    private void PrintArrow()
+    {
+        Console.Write("-->");
+        Console.SetCursorPosition(0, Console.CursorTop);
+    }
+
+    private void PrintSpace()
+    {
+        Console.SetCursorPosition(0, Console.CursorTop);
+        Console.Write("   ");
+    }
 }
