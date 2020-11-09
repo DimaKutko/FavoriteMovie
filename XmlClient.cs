@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml;
 
 class XmlClient
@@ -22,5 +23,29 @@ class XmlClient
         {
             return false;
         }   
+    }
+
+
+    public List<Movie> ToSearchList(String xml)
+    {
+        XmlDocument doc = new XmlDocument();
+        doc.LoadXml(xml);
+
+        XmlNodeList nodes = doc.GetElementsByTagName("result");
+
+        List<Movie> list = new List<Movie>(nodes.Count);
+
+        foreach (XmlNode node in nodes)
+        {
+            list.Add(
+                new ShortMovie(
+                    node.Attributes.GetNamedItem("title").Value,
+                    node.Attributes.GetNamedItem("year").Value,
+                    node.Attributes.GetNamedItem("imdbID").Value
+                    )
+            );
+        }
+
+        return list;
     }
 }

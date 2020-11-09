@@ -10,7 +10,9 @@ namespace FavoriteMovie
 
             String data = api.SerchAllMovie("Avatar");
 
-            Console.WriteLine(data);
+            SearchList movies = new SearchList(data);
+
+            movies.Print();
 
             Console.ReadKey();
         }
