@@ -49,11 +49,7 @@ public class FullMovie : Movie{
 
     }
 
-    public bool Viewed
-    {
-        get { return viewed; }
-        set { viewed = value; }
-    }
+    public bool Viewed{get{return viewed;}set {viewed = value;}}
 
     public int Rating
     {
