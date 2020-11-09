@@ -22,7 +22,16 @@ public abstract class Movie
         {
             Console.WriteLine($"Error {e.Message}");
         }
-      
+    }
+
+    public String Title
+    {
+        get { return title;}
+    }
+
+    public int Year
+    {
+        get { return year;}
     }
 }
 
@@ -39,6 +48,56 @@ public class FullMovie : Movie{
     public FullMovie(String title, String year) : base(title, year) {
 
     }
+
+    public bool Viewed
+    {
+        get { return viewed; }
+        set { viewed = value; }
+    }
+
+    public int Rating
+    {
+        get{ return rating; }
+        set
+        {
+            if (value >= 10)
+            {
+                rating = 10;
+            }
+            else if(value <= 0)
+            {
+                rating = 0;
+            }
+            else
+            {
+                rating = value;
+            }
+        }
+    }
+
+    public String Comment
+    {
+        get
+        {
+            if(comment != null)
+            {
+                return comment;
+            }
+            else
+            {
+                return "No comment";
+            }
+        }
+        set
+        {
+            comment = value;
+        }
+    }
+
+    public String Writer {get{return writer;}}
+    public String Genre {get{return genre;}}
+    public String Actors {get{return actors;}}
+    public String Plot {get{return plot;}}
 }
 
 public class ShortMovie : Movie {
@@ -48,4 +107,6 @@ public class ShortMovie : Movie {
     {
         this.imdbID = imdbID;
     }
+
+    public String ID {get{return imdbID;}}
 }
