@@ -24,15 +24,8 @@ public abstract class Movie
         }
     }
 
-    public String Title
-    {
-        get { return title;}
-    }
-
-    public int Year
-    {
-        get { return year;}
-    }
+    public String Title{get{return title;}}
+    public int Year{get{return year;}}
 }
 
 public class FullMovie : Movie{
