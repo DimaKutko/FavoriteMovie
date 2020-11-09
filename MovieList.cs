@@ -7,12 +7,15 @@ public abstract class MovieList
 
     public void Print()
     {
+        Console.CursorVisible = false;
         foreach (Movie m in list)
         {
-
+            Console.SetCursorPosition(4, Console.CursorTop);
             Console.WriteLine($"[{m.Year}] | {m.Title}");
         }
     }
+
+    public int Size {get{return list.Count;}}
 }
 
 public class FavoriteList : MovieList 

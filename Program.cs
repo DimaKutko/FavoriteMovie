@@ -6,19 +6,25 @@ namespace FavoriteMovie
     {
         static void Main(string[] args)
         {
-            //RestApiClient api = new RestApiClient();
+            RestApiClient api = new RestApiClient();
 
-            //String data = api.SerchAllMovie("Avatar");
+            String data = api.SerchAllMovie("Avatar");
 
-            //SearchList movies = new SearchList(data);
+            SearchList movies = new SearchList(data);
 
-            //movies.Print();
+            movies.Print();
+
+
 
             Menu m = new Menu();
 
-            m.PrintMenu();
+            int select = m.Selector(movies.Size);
 
-            Console.ReadKey();
+            Console.WriteLine($"Select: {select}");
+
+            //m.PrintMenu();
+
+            //Console.ReadKey();
         }
     }
 }
