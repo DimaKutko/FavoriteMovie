@@ -46,8 +46,18 @@ public class MovieList : IEnumerable
     }
 
     public void SortByTitle() => Array.Sort(list.ToArray(), new Movie.SortByTitle());
-    
+    public void SortByYear() => Array.Sort(list.ToArray(), new Movie.SortByYear());
+    public void SortByRating() => Array.Sort(list.ToArray(), new Movie.SortByRating());
 
+    public void Remove(int index)
+    {
+        list.RemoveAt(index);
+    }
+
+    public void Remove(Movie movie)
+    {
+        list.Remove(movie);
+    }
 
     //public void Selector()
     //{
