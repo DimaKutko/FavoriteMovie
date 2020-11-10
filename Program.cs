@@ -8,34 +8,38 @@ namespace FavoriteMovie
         {
             FavoriteList myMovie = CacheClient.CacheRead();
 
-            myMovie.Print();
+            Menu.DrawFrame();
 
+            Menu.Message("Test message");
+
+            Menu.CleanMessage();
 
             bool run  = true;
 
-            //Console.Clear();
-            //Console.SetCursorPosition(0, 0);
-            //Menu.PrintMenu();
+            Menu.PrintMenu();
 
-            //while (run)
-            //{
-            //switch (Menu.Selector(Menu.Size))
-            //    {
-            //        case 0:
-            myMovie.Add(Menu.Item0());
-            //            break;
+            while (run)
+            {
+                switch (Menu.Selector(Menu.Size))
+                {
+                    case 0:
+                        {
+                            var movie = Menu.Item0();
+
+                            if(movie != null) myMovie.Add(movie);
+                        }
+            break;
 
 
-            //        default:
-            //            run = false;
-            //            break;
-            //    }
+            default:
+                        run = false;
+            break;
+        }
 
-            //}
+    }
 
-            //myMovie.Print();
 
-            CacheClient.CacheWrite(myMovie);
+    CacheClient.CacheWrite(myMovie);
 
         }
     }

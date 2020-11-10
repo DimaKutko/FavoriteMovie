@@ -10,6 +10,8 @@ public static class Menu {
 
     private static readonly String error = "ERROR";
 
+    private static readonly int width = 70, height = 13;
+
 
     private static readonly List<String> masMenu = new List<string>(){ item1, item2, item3, item4 };
 
@@ -30,14 +32,78 @@ public static class Menu {
         }
     }
 
+    public static void DrawFrame(){
+
+        Console.Clear();
+
+        for (int i = 1; i < width; i++)
+        {
+            Console.SetCursorPosition(i, 0);
+            Console.Write(Convert.ToChar(0x2550));
+            Console.SetCursorPosition(i, 11);
+            Console.Write(Convert.ToChar(0x2550));
+            Console.SetCursorPosition(i, 13);
+            Console.Write(Convert.ToChar(0x2550));
+        }
+
+        for (int i = 1; i < height; i++)
+        {
+            Console.SetCursorPosition(0, i);
+            Console.Write(Convert.ToChar(0x2551));
+            Console.SetCursorPosition(width, i);
+            Console.Write(Convert.ToChar(0x2551));
+        }
+
+        Console.SetCursorPosition(0, 0);
+        Console.Write(Convert.ToChar(0x2554));
+        Console.SetCursorPosition(width, 0);
+        Console.Write(Convert.ToChar(0x2557));
+        Console.SetCursorPosition(width, 11);
+        Console.Write(Convert.ToChar(0x2563));
+        Console.SetCursorPosition(width, 13);
+        Console.Write(Convert.ToChar(0x255D));
+        Console.SetCursorPosition(0, 13);
+        Console.Write(Convert.ToChar(0x255A));
+        Console.SetCursorPosition(0, 11);
+        Console.Write(Convert.ToChar(0x2560));
+    }
+
+    public static void CleanMessage(){
+        for (int i = 1; i < width; i++)
+        {
+            Console.SetCursorPosition(i, height-1);
+            Console.Write(" ");
+        }
+    }
+
+    public static void Message(String message)
+    {
+        CleanMessage();
+        Console.SetCursorPosition(2, height - 1);
+        Console.Write(message);
+    }
+
+    public static void CleanArea()
+    {
+        for (int x = 1; x < width - 1; x++)
+        {
+            for (int y = 1; y < height - 3; y++)
+            {
+                Console.SetCursorPosition(x, y);
+                Console.Write(" ");
+            }
+        }
+    }
+
     public static FullMovie Item0()
     {
-        Console.Clear();
-        Console.SetCursorPosition(1,1);
+        Console.SetCursorPosition(4,1);
 
         Console.Write("Enter the title of the movie to search: ");
 
         String title = Console.ReadLine();
+
+        CleanArea();
 
         String data = RestApiClient.SerchAllMovie(title);
 
@@ -49,7 +115,11 @@ public static class Menu {
 
             movies.Print();
 
+            Message(@"UP[W, Up Arrow] | Down[S, Down Arrow] | Enter[Enter] | Exit[Esc]");
+
             int select = Selector(movies.Size);
+
+            CleanMessage();
 
             if (select == -1) return null;
 
@@ -115,6 +185,7 @@ public static class Menu {
                     run = false;
                     break;
                 case ConsoleKey.Escape:
+                    run = false;
                     return -1;
                 default:
                     Console.SetCursorPosition(1, Console.CursorTop);
