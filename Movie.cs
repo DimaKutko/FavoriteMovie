@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 [Serializable]
-public class Movie
+public class Movie 
 {
     protected String title;
     protected int year;
@@ -100,6 +102,45 @@ public class Movie
         set
         {
             comment = value;
+        }
+    }
+
+    public class SortByTitle : IComparer
+    {
+        public int Compare(object x, object y)
+        {
+            Movie obj1 = x as Movie;
+            Movie obj2 = y as Movie;
+
+            if (Convert.ToInt32(obj1.title[0]) > Convert.ToInt32(obj2.title[0])) return 1;
+            if (Convert.ToInt32(obj1.title[0]) < Convert.ToInt32(obj2.title[0])) return -1;
+            return 0;
+        }
+    }
+
+    public class SortByYear : IComparer
+    {
+        public int Compare(object x, object y)
+        {
+            Movie obj1 = x as Movie;
+            Movie obj2 = y as Movie;
+
+            if (obj1.year > obj2.year) return 1;
+            if (obj1.year < obj2.year) return -1;
+            return 0;
+        }
+    }
+
+    public class SortByRating : IComparer
+    {
+        public int Compare(object x, object y)
+        {
+            Movie obj1 = x as Movie;
+            Movie obj2 = y as Movie;
+
+            if (obj1.rating > obj2.rating) return 1;
+            if (obj1.rating < obj2.rating) return -1;
+            return 0;
         }
     }
 

@@ -17,6 +17,9 @@ public class MovieList : IEnumerable
         list = XmlClient.ToSearchList(xml);
     }
 
+    public int Size { get { return list.Count; } }
+    public Movie this[int index] { get { return list[index]; } }
+
     public IEnumerator GetEnumerator()
     {
         return list.GetEnumerator();
@@ -31,8 +34,6 @@ public class MovieList : IEnumerable
         }
     }
 
-    public Movie this[int index]{get {return list[index];}}
-
     public bool this[String id]
     {
         get {
@@ -44,39 +45,69 @@ public class MovieList : IEnumerable
         }
     }
 
-    public int Size {get{return list.Count;}}
+    public void SortByTitle() => Array.Sort(list.ToArray(), new Movie.SortByTitle());
+    
+
 
     //public void Selector()
     //{
     //    bool run = true;
-    //    int top = 0, bottom;
+    //    int masTop = 0, masBottom;
 
-    //    if(list.Count >= 10)
+    //    if (list.Count >= 10)
     //    {
-    //        bottom = 10;
+    //        masBottom = 10;
     //    }
     //    else
     //    {
-    //        bottom = list.Count;
+    //        masBottom = list.Count;
     //    }
 
+
     //    Menu.Message(@"UP[W, Up Arrow] | Down[S, Down Arrow] | Enter[Enter] | Exit[Esc]");
+    //    Console.SetCursorPosition(4, 1);
+    //    Menu.PrintArrow();
     //    while (run)
     //    {
     //        Menu.CleanArea();
 
-    //        for (int i = top, cursorTop = 1; i < bottom; i++, cursorTop++)
+    //        int cursorTop = Console.CursorTop;
+    //        int cursorLeft = Console.CursorLeft;
+
+    //        for (int i = masTop, _cursorTop = 1; i < masBottom; i++, _cursorTop++)
     //        {
-    //            Console.SetCursorPosition(4, cursorTop);
+    //            Console.SetCursorPosition(4, _cursorTop);
 
-    //            FullMovie movie = (FullMovie)list[i];
-
-    //            Console.Write(movie);
+    //            Console.Write(list[i]);
     //        }
+
+    //        Console.CursorTop = cursorTop;
+    //        Console.CursorLeft = cursorLeft;
 
     //        switch (Console.ReadKey().Key)
     //        {
-                
+    //            case ConsoleKey.W:
+    //            case ConsoleKey.UpArrow:
+    //                if(Console.CursorTop != 1)
+    //                {
+    //                    Menu.PrintSpace();
+    //                    Console.SetCursorPosition(1, Console.CursorTop - 1);
+    //                    Menu.PrintArrow();
+    //                }else if (masTop != 0)
+    //                {
+    //                    masTop--;
+    //                    masBottom--;
+    //                }
+    //                else
+    //                {
+    //                    Console.SetCursorPosition(1, Console.CursorTop);
+    //                    Menu.PrintArrow();
+    //                }
+    //                break;
+    //            case ConsoleKey.S:
+    //            case ConsoleKey.DownArrow:
+    //                //if (Console.CursorTop != 11)
+    //                    break;
     //            default:
     //                break;
     //        }
