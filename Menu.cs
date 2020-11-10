@@ -85,7 +85,7 @@ public static class Menu {
     {
         for (int x = 1; x < width - 1; x++)
         {
-            for (int y = 1; y < height - 3; y++)
+            for (int y = 1; y < height - 2; y++)
             {
                 Console.SetCursorPosition(x, y);
                 Console.Write(" ");
@@ -95,9 +95,9 @@ public static class Menu {
 
     public static Movie Item0()
     {
-        Console.SetCursorPosition(4,1);
+        CleanMessage();
 
-        Console.Write("Enter the title of the movie to search: ");
+        PrintInMenu("Enter the title of the movie to search: ");
 
         String title = Console.ReadLine();
 
@@ -125,8 +125,14 @@ public static class Menu {
 
             if (data != error)
             {
-                return XmlClient.XmlToFullMovie(data);
+                movie = XmlClient.XmlToFullMovie(data);
+
+                movie.Viewed = YesNo("Have you watched this movie?");
             }
+        }
+        else
+        {
+            ToContinue("Find movie failed =(");
         }
 
         return null;
@@ -135,6 +141,54 @@ public static class Menu {
     public static void Item3(MovieList list)
     {
         
+    }
+    
+    public static void ToContinue(String message) {
+        PrintInMenu(message);
+        Console.SetCursorPosition(4, Console.CursorTop + 1);
+        Console.Write("Press any button to continue");
+
+        Console.ReadKey();
+
+        CleanArea();
+    }
+
+    public static void PrintInMenu(String message)
+    {
+        CleanArea();
+
+        Console.SetCursorPosition(4, 1);
+
+        Console.Write(message);
+    }
+
+    public static bool YesNo(String message)
+    {
+        Message("Yes[Y] | No[N]");
+
+        bool selected = false; 
+
+        bool run = true;
+        while (run)
+        {
+            PrintInMenu(message);
+
+            switch (Console.ReadKey().Key)
+            {
+                case ConsoleKey.Y:
+                    selected = true;
+                    run = false;
+                    break;
+                case ConsoleKey.N:
+                    selected = false;
+                    run = false;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return selected;
     }
 
     public static int Selector(int size)
