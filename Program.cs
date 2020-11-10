@@ -14,13 +14,29 @@ namespace FavoriteMovie
 
             movies.Print();
 
-
-
             Menu m = new Menu();
 
             int select = m.Selector(movies.Size);
 
-            Console.WriteLine($"Select: {select}");
+            //Console.WriteLine($"Select: {select}");
+
+            ShortMovie movie = (ShortMovie)movies[select];
+
+            Console.Clear();
+
+            Console.SetCursorPosition(0, 0);
+
+            Console.WriteLine(movie.ToString());
+
+            data = api.GetMovie(movie.ID);
+
+            XmlClient xml = new XmlClient();
+
+            var full = xml.XmlToFullMovie(data);
+
+            Console.WriteLine(full.ToString());
+
+            Console.ReadKey();
 
             //m.PrintMenu();
 

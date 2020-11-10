@@ -42,6 +42,20 @@ class RestApiClient
         return response;
     }
 
+    public String GetMovie(String id)
+    {
+        String url = api + apiKey + "&" + optionsDataType + "&" + optionsID + id;
+
+        String response = GetRequest(url);
+
+        if (response != error)
+        {
+            response = CheckResponse(response);
+        }
+
+        return response;
+    }
+
     private String CheckResponse(String response)
     {
         if (xmlClient.CheckResponseXml(response))

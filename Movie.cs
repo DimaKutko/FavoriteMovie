@@ -24,8 +24,8 @@ public abstract class Movie
         }
     }
 
-    public String Title{get{return title;}}
-    public int Year{get{return year;}}
+    public String Title { get { return title; } }
+    public int Year { get { return year; } }
 }
 
 public class FullMovie : Movie{
@@ -37,12 +37,31 @@ public class FullMovie : Movie{
     private String genre;
     private String actors;
     private String plot;
+    private String rated;
+    private String released;
+    private String runtime;
+    private String director;
+    private String language;
+    private String country;
+    private String awards;
+    private String imdbRating;
 
-    public FullMovie(String title, String year) : base(title, year) {
-
+    public FullMovie(FullMoviePayload payload) : base(payload.title, payload.year) {
+        writer = payload.writer;
+        genre = payload.genre;
+        actors = payload.actors;
+        plot = payload.plot;
+        rated = payload.rated;
+        released = payload.released;
+        runtime = payload.runtime;
+        director = payload.director;
+        language = payload.language;
+        country = payload.country;
+        awards = payload.awards;
+        country = payload.imdbRating;
     }
 
-    public bool Viewed{get{return viewed;}set {viewed = value;}}
+    public bool Viewed{get => viewed; set =>viewed = value;}
 
     public int Rating
     {
@@ -83,10 +102,23 @@ public class FullMovie : Movie{
         }
     }
 
-    public String Writer {get{return writer;}}
-    public String Genre {get{return genre;}}
-    public String Actors {get{return actors;}}
-    public String Plot {get{return plot;}}
+    public string Writer { get => writer;}
+    public string Genre { get => genre;}
+    public string Actors { get => actors; }
+    public string Plot { get => plot;}
+    public string Rated { get => rated; }
+    public string Released { get => released; }
+    public string Runtime { get => runtime;}
+    public string Director { get => director;}
+    public string Language { get => language;}
+    public string Country { get => country;}
+    public string Awards { get => awards; }
+    public string ImdbRating { get => imdbRating;}
+
+    public override string ToString()
+    {
+        return "[" + year + "]" + " | " + title + " by " + director;
+    }
 }
 
 public class ShortMovie : Movie {
@@ -98,4 +130,9 @@ public class ShortMovie : Movie {
     }
 
     public String ID {get{return imdbID;}}
+
+    public override string ToString()
+    {
+        return "[" + year + "]"+ " | " + title  + " id: " + imdbID; 
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 public abstract class MovieList
@@ -15,11 +16,13 @@ public abstract class MovieList
         }
     }
 
+    public  Movie this[int index]{get {return list[index];}}
+
     public int Size {get{return list.Count;}}
 }
 
-public class FavoriteList : MovieList 
-{
+public class FavoriteList : MovieList
+{ 
     public FavoriteList(String xml){
 
     }
@@ -33,6 +36,4 @@ public class SearchList : MovieList
 
         list = xmlClient.ToSearchList(xml);
     }
-
-
 }
