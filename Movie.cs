@@ -105,10 +105,21 @@ public class Movie
 
     public override string ToString()
     {
+        String str;
+
         if (director != null) {
-            return "[" + year + "]" + " | " + title + " by " + director;
+            str = "[" + year + "]" + " | " + title + " by " + director;
         } else {
-            return "[" + year + "]" + " | " + title;
+            str = "[" + year + "]" + " | " + title;
         }
+
+        if(str.Length > Menu.WidthArea)
+        {
+            int cut = str.Length - Menu.WidthArea + 3;
+            str = str.Substring(0, str.Length - cut);
+            str += "...";
+        }
+
+        return str;
     }
 }

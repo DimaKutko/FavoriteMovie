@@ -17,6 +17,11 @@ public static class Menu {
 
     public static int Size { get => masMenu.Count; }
 
+    public static int Width => width;
+    public static int WidthArea => width - 5;
+
+    public static int Height => height;
+
     public static void PrintMenu()
     {
         DrawFrame();
@@ -111,7 +116,11 @@ public static class Menu {
 
             Console.SetCursorPosition(4, 1);
 
-            movies.Print();
+            foreach (Movie m in movies) {
+                Console.SetCursorPosition(4, Console.CursorTop);
+                Console.WriteLine(m);
+            }
+
 
             int select = Selector(movies.Size);
 

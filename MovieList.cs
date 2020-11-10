@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [Serializable]
-public class MovieList
+public class MovieList : IEnumerable
 {
     protected List<Movie> list;
 
@@ -17,14 +17,9 @@ public class MovieList
         list = XmlClient.ToSearchList(xml);
     }
 
-    public void Print()
+    public IEnumerator GetEnumerator()
     {
-        Console.CursorVisible = false;
-        foreach (Movie m in list)
-        {
-            Console.SetCursorPosition(4, Console.CursorTop);
-            Console.WriteLine($"[{m.Year}] | {m.Title}");
-        }
+        return list.GetEnumerator();
     }
 
     public void Add(Movie movie)
