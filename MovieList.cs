@@ -29,10 +29,25 @@ public class MovieList
 
     public void Add(Movie movie)
     {
-        list.Add(movie);
+
+        if (!this[movie.ID])
+        {
+            list.Add(movie);
+        }
     }
 
     public Movie this[int index]{get {return list[index];}}
+
+    public bool this[String id]
+    {
+        get {
+            foreach (Movie movie in list)
+            {
+                if (movie.ID == id) return true;
+            }
+            return false;
+        }
+    }
 
     public int Size {get{return list.Count;}}
 

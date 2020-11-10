@@ -19,7 +19,7 @@ public static class Menu {
 
     public static void PrintMenu()
     {
-        CleanArea();
+        DrawFrame();
 
         Console.SetCursorPosition(4,1);
         foreach (String item in masMenu)
@@ -128,6 +128,30 @@ public static class Menu {
                 movie = XmlClient.XmlToFullMovie(data);
 
                 movie.Viewed = YesNo("Have you watched this movie?");
+
+                if (movie.Viewed)
+                {
+                    PrintInMenu("Will enter your movie rating from 0 to 10: ");
+
+                    try
+                    {
+                        movie.Rating = Convert.ToInt32(Console.ReadLine());
+                    }
+                    catch (Exception ex)
+                    {
+                        movie.Rating = 0;
+                    }
+                }
+                else
+                {
+                    movie.Rating = 0;
+                }
+
+                PrintInMenu("Enter a comment for the movie: ");
+
+                movie.Comment = Console.ReadLine();
+
+                return movie;
             }
         }
         else
@@ -144,6 +168,7 @@ public static class Menu {
     }
     
     public static void ToContinue(String message) {
+        CleanMessage();
         PrintInMenu(message);
         Console.SetCursorPosition(4, Console.CursorTop + 1);
         Console.Write("Press any button to continue");
@@ -188,6 +213,7 @@ public static class Menu {
             }
         }
 
+        CleanMessage();
         return selected;
     }
 
