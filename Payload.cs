@@ -4,6 +4,7 @@ public struct FullMoviePayload
 {
     public String title;
     public String year;
+    public String imdbID;
     public String writer;
     public String genre;
     public String actors;

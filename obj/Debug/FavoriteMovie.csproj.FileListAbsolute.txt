@@ -9,3 +9,4 @@
 /Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie.runtimeconfig.dev.json
 /Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie.dll
 /Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie.pdb
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie/obj/Debug/FavoriteMovie.csprojAssemblyReference.cache

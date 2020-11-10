@@ -6,7 +6,7 @@ namespace FavoriteMovie
     {
         static void Main(string[] args)
         {
-            FavoriteList myMovie = CacheClient.CacheRead();
+            MovieList myMovie = CacheClient.CacheRead();
 
             Menu.DrawFrame();
 
@@ -16,10 +16,10 @@ namespace FavoriteMovie
 
             bool run  = true;
 
-            Menu.PrintMenu();
-
             while (run)
             {
+                Menu.PrintMenu();
+
                 switch (Menu.Selector(Menu.Size))
                 {
                     case 0:
@@ -28,18 +28,23 @@ namespace FavoriteMovie
 
                             if(movie != null) myMovie.Add(movie);
                         }
-            break;
-
-
-            default:
+                        break;
+                    case 3:
+                        {
+                            
+                        }
+                        break;
+                    case -1:
                         run = false;
-            break;
-        }
+                        break;
+                    default:
+                        break;
+                }
 
-    }
+            }
 
 
-    CacheClient.CacheWrite(myMovie);
+            CacheClient.CacheWrite(myMovie);
 
         }
     }

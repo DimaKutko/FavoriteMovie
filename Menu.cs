@@ -19,20 +19,18 @@ public static class Menu {
 
     public static void PrintMenu()
     {
-        Console.CursorVisible = false;
-        Console.Clear();
-        for (int i = 0; i < 35; i++)
-        {
-            Console.Write(Convert.ToChar(0x2550));
-        }
-        Console.SetCursorPosition(0,1);
+        CleanArea();
+
+        Console.SetCursorPosition(4,1);
         foreach (String item in masMenu)
         {
-            PrintItem(item);
+            Console.WriteLine(item);
+            Console.SetCursorPosition(4, Console.CursorTop);
         }
     }
 
     public static void DrawFrame(){
+        Console.CursorVisible = false;
 
         Console.Clear();
 
@@ -95,7 +93,7 @@ public static class Menu {
         }
     }
 
-    public static FullMovie Item0()
+    public static Movie Item0()
     {
         Console.SetCursorPosition(4,1);
 
@@ -109,13 +107,11 @@ public static class Menu {
 
         if(data != error)
         {
-            SearchList movies = new SearchList(data);
+            MovieList movies = new MovieList(data);
 
             Console.SetCursorPosition(4, 1);
 
             movies.Print();
-
-            Message(@"UP[W, Up Arrow] | Down[S, Down Arrow] | Enter[Enter] | Exit[Esc]");
 
             int select = Selector(movies.Size);
 
@@ -123,7 +119,7 @@ public static class Menu {
 
             if (select == -1) return null;
 
-            ShortMovie movie = (ShortMovie)movies[select];
+            Movie movie = (Movie)movies[select];
 
             data = RestApiClient.GetMovie(movie.ID);
 
@@ -136,15 +132,20 @@ public static class Menu {
         return null;
     }
 
-    private static void PrintItem(String item)
+    public static void Item3(MovieList list)
     {
-        Console.SetCursorPosition(4, Console.CursorTop + 1);
-        Console.Write(item);
+        
     }
 
     public static int Selector(int size)
     {
+        Console.CursorVisible = false;
+
+        Message(@"UP[W, Up Arrow] | Down[S, Down Arrow] | Enter[Enter] | Exit[Esc]");
+
         Console.SetCursorPosition(1, 1);
+
+        int cursor = Console.CursorTop;
 
         PrintArrow();
 
@@ -182,27 +183,31 @@ public static class Menu {
                     }
                     break;
                 case ConsoleKey.Enter:
+                    cursor = Console.CursorTop;
                     run = false;
                     break;
                 case ConsoleKey.Escape:
+                    cursor = 0;
                     run = false;
-                    return -1;
+                    break;
                 default:
                     Console.SetCursorPosition(1, Console.CursorTop);
                     PrintArrow();
                     break;
             }
         }
-        return Console.CursorTop - 1;
+        Console.CursorVisible = true;
+
+        return cursor - 1;
     }
 
-    private static void PrintArrow()
+    public static void PrintArrow()
     {
         Console.Write("-->");
         Console.SetCursorPosition(1, Console.CursorTop);
     }
 
-    private static void PrintSpace()
+    public static void PrintSpace()
     {
         Console.SetCursorPosition(1, Console.CursorTop);
         Console.Write("   ");

@@ -38,7 +38,7 @@ public static class XmlClient
         foreach (XmlNode node in nodes)
         {
             list.Add(
-                new ShortMovie(
+                new Movie(
                     node.Attributes.GetNamedItem("title").Value,
                     node.Attributes.GetNamedItem("year").Value,
                     node.Attributes.GetNamedItem("imdbID").Value
@@ -49,7 +49,7 @@ public static class XmlClient
         return list;
     }
 
-    public static FullMovie XmlToFullMovie(String xml)
+    public static Movie XmlToFullMovie(String xml)
     {
         XmlDocument doc = new XmlDocument();
         doc.LoadXml(xml);
@@ -75,7 +75,8 @@ public static class XmlClient
         payload.language = movie.GetAttribute("language");
         payload.awards = movie.GetAttribute("awards");
         payload.imdbRating = movie.GetAttribute("imdbRating");
+        payload.imdbID = movie.GetAttribute("imdbID");
 
-        return new FullMovie(payload: payload);
+        return new Movie(payload: payload);
     }
 }

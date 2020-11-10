@@ -6,7 +6,7 @@ public static class CacheClient
 {
     private static readonly String fileName = "movies.dat";
 
-    public static void CacheWrite(FavoriteList myMovies)
+    public static void CacheWrite(MovieList myMovies)
     {
         var formatter = new BinaryFormatter();
         using (var fStream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
@@ -15,21 +15,21 @@ public static class CacheClient
         }
     }
 
-    public static FavoriteList CacheRead()
+    public static MovieList CacheRead()
     {
-        FavoriteList myMovies;
+        MovieList myMovies;
 
         using (FileStream fStream = File.OpenRead(fileName))
         {
             if(fStream.Length != 0)
             {
                 var formatter = new BinaryFormatter();
-                var temp = (FavoriteList)formatter.Deserialize(fStream);
+                var temp = (MovieList)formatter.Deserialize(fStream);
                 myMovies = temp;
             }
             else
             {
-                myMovies = new FavoriteList();
+                myMovies = new MovieList();
             }
         }
 

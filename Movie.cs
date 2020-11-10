@@ -1,40 +1,14 @@
 ﻿using System;
 
 [Serializable]
-public abstract class Movie
+public class Movie
 {
     protected String title;
     protected int year;
-
-    protected Movie(String title, int year)
-    {
-        this.title = title;
-        this.year = year;
-    }
-
-    protected Movie(String title, String year)
-    {
-        try
-        {
-            this.title = title;
-            this.year = Convert.ToInt32(year);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine($"Error {e.Message}");
-        }
-    }
-
-    public String Title { get { return title; } }
-    public int Year { get { return year; } }
-}
-
-[Serializable]
-public class FullMovie : Movie{
     private bool viewed;
     private int rating;
     private String comment;
-
+    private String imdbID;
     private String writer;
     private String genre;
     private String actors;
@@ -47,8 +21,11 @@ public class FullMovie : Movie{
     private String country;
     private String awards;
     private String imdbRating;
-
-    public FullMovie(FullMoviePayload payload) : base(payload.title, payload.year) {
+    
+    public Movie(FullMoviePayload payload){
+        title = payload.title;
+        year = Convert.ToInt32(payload.year);
+        imdbID = payload.imdbID;
         writer = payload.writer;
         genre = payload.genre;
         actors = payload.actors;
@@ -63,7 +40,29 @@ public class FullMovie : Movie{
         country = payload.imdbRating;
     }
 
-    public bool Viewed{get => viewed; set =>viewed = value;}
+    public Movie(String title, String year, String imdbID)
+    {
+        this.title = title;
+        this.year = Convert.ToInt32(year);
+        this.imdbID = imdbID;
+    }
+
+    public String Title { get { return title; } }
+    public int Year { get { return year; } }
+    public String Writer { get => writer; }
+    public String Genre { get => genre; }
+    public String Actors { get => actors; }
+    public String Plot { get => plot; }
+    public String Rated { get => rated; }
+    public String Released { get => released; }
+    public String Runtime { get => runtime; }
+    public String Director { get => director; }
+    public String Language { get => language; }
+    public String Country { get => country; }
+    public String Awards { get => awards; }
+    public String ImdbRating { get => imdbRating; }
+    public bool Viewed { get => viewed; set => viewed = value; }
+    public string ID { get => imdbID; set => imdbID = value; }
 
     public int Rating
     {
@@ -104,37 +103,12 @@ public class FullMovie : Movie{
         }
     }
 
-    public string Writer { get => writer;}
-    public string Genre { get => genre;}
-    public string Actors { get => actors; }
-    public string Plot { get => plot;}
-    public string Rated { get => rated; }
-    public string Released { get => released; }
-    public string Runtime { get => runtime;}
-    public string Director { get => director;}
-    public string Language { get => language;}
-    public string Country { get => country;}
-    public string Awards { get => awards; }
-    public string ImdbRating { get => imdbRating;}
-
     public override string ToString()
     {
-        return "[" + year + "]" + " | " + title + " by " + director;
-    }
-}
-
-public class ShortMovie : Movie {
-    private String imdbID;
-
-    public ShortMovie(String title, String year, String imdbID) : base(title, year)
-    {
-        this.imdbID = imdbID;
-    }
-
-    public String ID {get{return imdbID;}}
-
-    public override string ToString()
-    {
-        return "[" + year + "]"+ " | " + title  + " id: " + imdbID; 
+        if (director != null) {
+            return "[" + year + "]" + " | " + title + " by " + director;
+        } else {
+            return "[" + year + "]" + " | " + title;
+        }
     }
 }

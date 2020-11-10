@@ -3,13 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 
 [Serializable]
-public abstract class MovieList
+public class MovieList
 {
     protected List<Movie> list;
 
     public MovieList()
     {
         list = new List<Movie>();
+    }
+
+    public MovieList(String xml)
+    {
+        list = XmlClient.ToSearchList(xml);
     }
 
     public void Print()
@@ -30,23 +35,41 @@ public abstract class MovieList
     public Movie this[int index]{get {return list[index];}}
 
     public int Size {get{return list.Count;}}
-}
 
-[Serializable]
-public class FavoriteList : MovieList
-{
+    //public void Selector()
+    //{
+    //    bool run = true;
+    //    int top = 0, bottom;
 
-    public FavoriteList()
-    {
-        list = new List<Movie>();
-    }
+    //    if(list.Count >= 10)
+    //    {
+    //        bottom = 10;
+    //    }
+    //    else
+    //    {
+    //        bottom = list.Count;
+    //    }
 
-}
+    //    Menu.Message(@"UP[W, Up Arrow] | Down[S, Down Arrow] | Enter[Enter] | Exit[Esc]");
+    //    while (run)
+    //    {
+    //        Menu.CleanArea();
 
-public class SearchList : MovieList
-{
-    public SearchList(String xml)
-    {
-        list = XmlClient.ToSearchList(xml);
-    }
+    //        for (int i = top, cursorTop = 1; i < bottom; i++, cursorTop++)
+    //        {
+    //            Console.SetCursorPosition(4, cursorTop);
+
+    //            FullMovie movie = (FullMovie)list[i];
+
+    //            Console.Write(movie);
+    //        }
+
+    //        switch (Console.ReadKey().Key)
+    //        {
+                
+    //            default:
+    //                break;
+    //        }
+    //    }
+    //}
 }
