@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Xml;
 
-class XmlClient
+public static class XmlClient
 {
-    public bool CheckResponseXml(String response)
+    public static bool CheckResponseXml(String response)
     {
         try
         {
@@ -26,7 +26,7 @@ class XmlClient
     }
 
 
-    public List<Movie> ToSearchList(String xml)
+    public static List<Movie> ToSearchList(String xml)
     {
         XmlDocument doc = new XmlDocument();
         doc.LoadXml(xml);
@@ -49,7 +49,7 @@ class XmlClient
         return list;
     }
 
-    public FullMovie XmlToFullMovie(String xml)
+    public static FullMovie XmlToFullMovie(String xml)
     {
         XmlDocument doc = new XmlDocument();
         doc.LoadXml(xml);

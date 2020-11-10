@@ -1,5 +1,6 @@
 ﻿using System;
 
+[Serializable]
 public abstract class Movie
 {
     protected String title;
@@ -28,6 +29,7 @@ public abstract class Movie
     public int Year { get { return year; } }
 }
 
+[Serializable]
 public class FullMovie : Movie{
     private bool viewed;
     private int rating;

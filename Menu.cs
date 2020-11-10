@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class Menu {
+public static class Menu {
 
-    private static readonly String item1 = "Search movie";
+    private static readonly String item1 = "Add movie";
     private static readonly String item2 = "Edit movie";
     private static readonly String item3 = "Delete movie";
     private static readonly String item4 = "Print my movie";
 
+    private static readonly String error = "ERROR";
+
+
     private static readonly List<String> masMenu = new List<string>(){ item1, item2, item3, item4 };
 
-    public void PrintMenu()
+    public static int Size { get => masMenu.Count; }
+
+    public static void PrintMenu()
     {
         Console.CursorVisible = false;
         Console.Clear();
@@ -25,19 +30,53 @@ public class Menu {
         }
     }
 
-    private void PrintItem(String item)
+    public static FullMovie Item0()
     {
-        Console.SetCursorPosition( 3, Console.CursorTop + 1);
+        Console.Clear();
+        Console.SetCursorPosition(1,1);
+
+        Console.Write("Enter the title of the movie to search: ");
+
+        String title = Console.ReadLine();
+
+        String data = RestApiClient.SerchAllMovie(title);
+
+        if(data != error)
+        {
+            SearchList movies = new SearchList(data);
+
+            Console.SetCursorPosition(4, 1);
+
+            movies.Print();
+
+            int select = Selector(movies.Size);
+
+            if (select == -1) return null;
+
+            ShortMovie movie = (ShortMovie)movies[select];
+
+            data = RestApiClient.GetMovie(movie.ID);
+
+            if (data != error)
+            {
+                return XmlClient.XmlToFullMovie(data);
+            }
+        }
+
+        return null;
+    }
+
+    private static void PrintItem(String item)
+    {
+        Console.SetCursorPosition(4, Console.CursorTop + 1);
         Console.Write(item);
     }
 
-    public int Selector(int size)
+    public static int Selector(int size)
     {
-        Console.SetCursorPosition(0, 0);
+        Console.SetCursorPosition(1, 1);
 
         PrintArrow();
-
-        size--;
 
         bool run = true;
         while (run)
@@ -46,15 +85,15 @@ public class Menu {
             {
                 case ConsoleKey.W:
                 case ConsoleKey.UpArrow:
-                    if (Console.CursorTop != 0)
+                    if (Console.CursorTop != 1)
                     {
                         PrintSpace();
-                        Console.SetCursorPosition(0, Console.CursorTop - 1);
+                        Console.SetCursorPosition(1, Console.CursorTop - 1);
                         PrintArrow();
                     }
                     else
                     {
-                        Console.SetCursorPosition(0, Console.CursorTop);
+                        Console.SetCursorPosition(1, Console.CursorTop);
                         PrintArrow();
                     }
                     break;
@@ -63,36 +102,38 @@ public class Menu {
                     if (Console.CursorTop != size)
                     {
                         PrintSpace();
-                        Console.SetCursorPosition(0, Console.CursorTop + 1);
+                        Console.SetCursorPosition(1, Console.CursorTop + 1);
                         PrintArrow();
                     }
                     else
                     {
-                        Console.SetCursorPosition(0, Console.CursorTop);
+                        Console.SetCursorPosition(1, Console.CursorTop);
                         PrintArrow();
                     }
                     break;
                 case ConsoleKey.Enter:
                     run = false;
                     break;
+                case ConsoleKey.Escape:
+                    return -1;
                 default:
-                    Console.SetCursorPosition(0, Console.CursorTop);
+                    Console.SetCursorPosition(1, Console.CursorTop);
                     PrintArrow();
                     break;
             }
         }
-        return Console.CursorTop;
+        return Console.CursorTop - 1;
     }
 
-    private void PrintArrow()
+    private static void PrintArrow()
     {
         Console.Write("-->");
-        Console.SetCursorPosition(0, Console.CursorTop);
+        Console.SetCursorPosition(1, Console.CursorTop);
     }
 
-    private void PrintSpace()
+    private static void PrintSpace()
     {
-        Console.SetCursorPosition(0, Console.CursorTop);
+        Console.SetCursorPosition(1, Console.CursorTop);
         Console.Write("   ");
     }
 }

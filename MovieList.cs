@@ -2,9 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[Serializable]
 public abstract class MovieList
 {
     protected List<Movie> list;
+
+    public MovieList()
+    {
+        list = new List<Movie>();
+    }
 
     public void Print()
     {
@@ -16,24 +22,31 @@ public abstract class MovieList
         }
     }
 
-    public  Movie this[int index]{get {return list[index];}}
+    public void Add(Movie movie)
+    {
+        list.Add(movie);
+    }
+
+    public Movie this[int index]{get {return list[index];}}
 
     public int Size {get{return list.Count;}}
 }
 
+[Serializable]
 public class FavoriteList : MovieList
-{ 
-    public FavoriteList(String xml){
+{
 
+    public FavoriteList()
+    {
+        list = new List<Movie>();
     }
+
 }
 
 public class SearchList : MovieList
 {
     public SearchList(String xml)
     {
-        XmlClient xmlClient = new XmlClient();
-
-        list = xmlClient.ToSearchList(xml);
+        list = XmlClient.ToSearchList(xml);
     }
 }

@@ -1,0 +1,11 @@
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie/obj/Debug/FavoriteMovie.AssemblyInfoInputs.cache
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie/obj/Debug/FavoriteMovie.AssemblyInfo.cs
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie/obj/Debug/FavoriteMovie.csproj.CoreCompileInputs.cache
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie/obj/Debug/FavoriteMovie.dll
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie/obj/Debug/FavoriteMovie.pdb
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie.deps.json
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie/obj/Debug/FavoriteMovie.genruntimeconfig.cache
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie.runtimeconfig.json
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie.runtimeconfig.dev.json
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie.dll
+/Users/DimaKutko/C#/FavoriteMovie/FavoriteMovie.pdb

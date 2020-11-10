@@ -6,41 +6,37 @@ namespace FavoriteMovie
     {
         static void Main(string[] args)
         {
-            RestApiClient api = new RestApiClient();
+            FavoriteList myMovie = CacheClient.CacheRead();
 
-            String data = api.SerchAllMovie("Avatar");
+            myMovie.Print();
 
-            SearchList movies = new SearchList(data);
 
-            movies.Print();
+            bool run  = true;
 
-            Menu m = new Menu();
+            //Console.Clear();
+            //Console.SetCursorPosition(0, 0);
+            //Menu.PrintMenu();
 
-            int select = m.Selector(movies.Size);
+            //while (run)
+            //{
+            //switch (Menu.Selector(Menu.Size))
+            //    {
+            //        case 0:
+            myMovie.Add(Menu.Item0());
+            //            break;
 
-            //Console.WriteLine($"Select: {select}");
 
-            ShortMovie movie = (ShortMovie)movies[select];
+            //        default:
+            //            run = false;
+            //            break;
+            //    }
 
-            Console.Clear();
+            //}
 
-            Console.SetCursorPosition(0, 0);
+            //myMovie.Print();
 
-            Console.WriteLine(movie.ToString());
+            CacheClient.CacheWrite(myMovie);
 
-            data = api.GetMovie(movie.ID);
-
-            XmlClient xml = new XmlClient();
-
-            var full = xml.XmlToFullMovie(data);
-
-            Console.WriteLine(full.ToString());
-
-            Console.ReadKey();
-
-            //m.PrintMenu();
-
-            //Console.ReadKey();
         }
     }
 }

@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 
-class RestApiClient
+public static class RestApiClient
 {
     private static readonly String api = "http://www.omdbapi.com/?";
     private static readonly String apiKey = "apikey=fdb692c9";
@@ -16,14 +16,7 @@ class RestApiClient
 
     private static readonly String error = "ERROR";
 
-    private XmlClient xmlClient;
-
-    public RestApiClient()
-    {
-        xmlClient = new XmlClient();
-    }
-
-    public String SerchAllMovie(String title, String year = null)
+    public static String SerchAllMovie(String title, String year = null)
     {
         String url = api + apiKey + "&" + optionsType + "&" + optionsDataType + "&"+ optionsSearch + title;
 
@@ -42,7 +35,7 @@ class RestApiClient
         return response;
     }
 
-    public String GetMovie(String id)
+    public static String GetMovie(String id)
     {
         String url = api + apiKey + "&" + optionsDataType + "&" + optionsID + id;
 
@@ -56,9 +49,9 @@ class RestApiClient
         return response;
     }
 
-    private String CheckResponse(String response)
+    private static String CheckResponse(String response)
     {
-        if (xmlClient.CheckResponseXml(response))
+        if (XmlClient.CheckResponseXml(response))
         {
             return response;
         }
@@ -68,7 +61,7 @@ class RestApiClient
         }
     }
 
-    private String GetRequest(String url)
+    private static String GetRequest(String url)
     {
         try
         {
@@ -88,7 +81,6 @@ class RestApiClient
                     readStream = new StreamReader(receiveStream, Encoding.GetEncoding(response.CharacterSet));
 
                 data = readStream.ReadToEnd();
-                //Console.WriteLine(data);
 
                 response.Close();
                 readStream.Close();
