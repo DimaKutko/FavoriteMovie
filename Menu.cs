@@ -177,7 +177,7 @@ public static class Menu {
 
         Movie movie = list[select];
 
-        Message("Edit[E] | Remove[R] | Exit[Esc]");
+        Message("Edit[E] | Delete[D] | Exit[Esc]");
 
         movie.Print();
 
@@ -191,9 +191,14 @@ public static class Menu {
                     break;
                 case ConsoleKey.E:
                     run = false;
+                    EditMovie(movie);
                     break;
-                case ConsoleKey.R:
+                case ConsoleKey.D:
                     run = false;
+                    if (YesNo("Are you sure you want to delete the " + movie.Title)) {
+                        list.Remove(select);
+                        ToContinue("Movie deleted");
+                    }
                     break;
                 default:
                     Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
@@ -201,8 +206,42 @@ public static class Menu {
                     break;
             }
         }
+    }
 
+    private static void EditMovie(Movie movie)
+    {
+        Message("Edit comment[C] | Edit viewed[V] | Exit[Esc]");
+        PrintInMenu("Select");
 
+        bool run = true;
+        while (run)
+        {
+            switch (Console.ReadKey().Key)
+            {
+                case ConsoleKey.C:
+                    run = false;
+                    movie.Comment = NewComment();
+                    break;
+                case ConsoleKey.V:
+                    run = false;
+                    movie.Viewed = YesNo("Have you watched this movie?");
+                    break;
+                case ConsoleKey.Escape:
+                    return;
+                default:
+                    Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                    Console.Write(" ");
+                    break;
+            }
+        }
+    }
+
+    private static String NewComment()
+    {
+        CleanMessage();
+        PrintInMenu("Enter new comment: ");
+        String newComment = Console.ReadLine();
+        return newComment;
     }
     
     public static void ToContinue(String message) {
@@ -247,6 +286,8 @@ public static class Menu {
                     run = false;
                     break;
                 default:
+                    Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                    Console.Write(" ");
                     break;
             }
         }
