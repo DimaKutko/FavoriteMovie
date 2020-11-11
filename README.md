@@ -1,4 +1,4 @@
-Practical work on c# (console).
+Practical work on C# (console).
 Realised:
 - Search and parsing movies
 - Adding a movie
