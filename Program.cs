@@ -23,16 +23,14 @@ namespace FavoriteMovie
                 switch (Menu.Selector(Menu.Size))
                 {
                     case 0:
-                        {
-                            var movie = Menu.Item1();
-
-                            if(movie != null) myMovie.Add(movie);
-                        }
+                        var movie = Menu.Item1();
+                        if(movie != null) myMovie.Add(movie);
                         break;
                     case 1:
-                        {
-                            Menu.Item2(myMovie);
-                        }
+                        Menu.Item2(myMovie);
+                        break;
+                    case 2:
+                        Menu.Item3(myMovie);
                         break;
                     case -1:
                         run = false;
@@ -42,10 +40,7 @@ namespace FavoriteMovie
                 }
 
             }
-
-
             CacheClient.CacheWrite(myMovie);
-
         }
     }
 }

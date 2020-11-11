@@ -206,12 +206,52 @@ public static class Menu {
                     break;
             }
         }
+
+        Item2(list);
+    }
+
+    public static void Item3(MovieList list)
+    {
+        CleanArea();
+        Message("Sotry by: Title[T] | Rating[R] | Year[Y], Exit[Esc]");
+
+        PrintInMenu("Select [T] | [R] | [Y] | [Esc]");
+
+        bool run = true;
+
+        while (run)
+        {
+            switch (Console.ReadKey().Key)
+            {
+                case ConsoleKey.R:
+                    run = false;
+                    list.SortByRating();
+                    ToContinue("Movies are sorted by yor rating");
+                    break;
+                case ConsoleKey.T:
+                    run = false;
+                    list.SortByTitle();
+                    ToContinue("Movies are sorted by title");
+                    break;
+                case ConsoleKey.Y:
+                    run = false;
+                    list.SortByYear();
+                    ToContinue("Movies are sorted by year");
+                    break;
+                case ConsoleKey.Escape:
+                    return;
+                default:
+                    Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                    Console.Write(" ");
+                    break;
+            }
+        }
     }
 
     private static void EditMovie(Movie movie)
     {
         Message("Edit comment[C] | Edit viewed[V] | Exit[Esc]");
-        PrintInMenu("Select C | V | Esc");
+        PrintInMenu("Select [C] | [V] | [Esc]");
 
         bool run = true;
         while (run)

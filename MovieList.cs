@@ -45,9 +45,33 @@ public class MovieList : IEnumerable
         }
     }
 
-    public void SortByTitle() => Array.Sort(list.ToArray(), new Movie.SortByTitle());
-    public void SortByYear() => Array.Sort(list.ToArray(), new Movie.SortByYear());
-    public void SortByRating() => Array.Sort(list.ToArray(), new Movie.SortByRating());
+    public void SortByTitle()
+    {
+        var array = list.ToArray();
+
+        Array.Sort(array, new Movie.SortByTitle());
+
+        list = new List<Movie>(array);
+    }
+
+
+    public void SortByYear()
+    {
+        var array = list.ToArray();
+
+        Array.Sort(array, new Movie.SortByYear());
+
+        list = new List<Movie>(array);
+    }
+
+    public void SortByRating()
+    {
+        var array = list.ToArray();
+
+        Array.Sort(array, new Movie.SortByRating());
+
+        list = new List<Movie>(array);
+    }
 
     public void Remove(int index)
     {
