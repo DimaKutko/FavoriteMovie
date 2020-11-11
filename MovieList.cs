@@ -99,6 +99,9 @@ public class MovieList : IEnumerable
                     {
                         masTop--;
                         masBottom--;
+                        Menu.PrintSpace();
+                        Console.SetCursorPosition(1, Console.CursorTop);
+                        Menu.PrintArrow();
                     }
                     else
                     {
@@ -118,6 +121,9 @@ public class MovieList : IEnumerable
                     {
                         masBottom++;
                         masTop++;
+                        Menu.PrintSpace();
+                        Console.SetCursorPosition(1, Console.CursorTop);
+                        Menu.PrintArrow();
                     }
                     else
                     {
@@ -130,12 +136,14 @@ public class MovieList : IEnumerable
                     run = false;
                     break;
                 case ConsoleKey.Escape:
-                    select = 0;
-                    run = false;
+                    return - 1;
+                default:
+                    Console.SetCursorPosition(1, Console.CursorTop);
+                    Menu.PrintArrow();
                     break;
             }
         }
 
-        return select - 1;
+        return masTop + select - 1;
     }
 }

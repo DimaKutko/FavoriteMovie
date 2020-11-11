@@ -148,15 +148,15 @@ public static class Menu {
                     {
                         movie.Rating = 0;
                     }
+
+                    PrintInMenu("Enter a comment for the movie: ");
+
+                    movie.Comment = Console.ReadLine();
                 }
                 else
                 {
                     movie.Rating = 0;
                 }
-
-                PrintInMenu("Enter a comment for the movie: ");
-
-                movie.Comment = Console.ReadLine();
 
                 return movie;
             }
@@ -173,7 +173,36 @@ public static class Menu {
     {
         int select = list.Selector();
 
-        ToContinue($"SELETED {select}");
+        if (select == -1) return;
+
+        Movie movie = list[select];
+
+        Message("Edit[E] | Remove[R] | Exit[Esc]");
+
+        movie.Print();
+
+        bool run = true;
+        while (run)
+        {
+            switch (Console.ReadKey().Key)
+            {
+                case ConsoleKey.Escape:
+                    run = false;
+                    break;
+                case ConsoleKey.E:
+                    run = false;
+                    break;
+                case ConsoleKey.R:
+                    run = false;
+                    break;
+                default:
+                    Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                    Console.Write(" ");
+                    break;
+            }
+        }
+
+
     }
     
     public static void ToContinue(String message) {

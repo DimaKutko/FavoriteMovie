@@ -105,6 +105,17 @@ public class Movie
         }
     }
 
+    private String YesNo
+    {
+        get {
+            if (viewed)
+            {
+               return "Yes";
+            }
+            return "No";
+        }
+    }
+
     public class SortByTitle : IComparer
     {
         public int Compare(object x, object y)
@@ -144,7 +155,50 @@ public class Movie
         }
     }
 
-    public override string ToString()
+    public void Print()
+    {
+        Menu.CleanArea();
+
+        Console.SetCursorPosition(1, 1);
+
+        Console.Write(CheckLength("[" + year + "]" + " | " + title + " by " + director));
+
+        Console.SetCursorPosition(1, 2);
+
+        Console.Write(CheckLength(rated + "  | " + country + " " + released));
+
+        Console.SetCursorPosition(1,3);
+
+        Console.Write(CheckLength("Genre: " + genre));
+
+        Console.SetCursorPosition(1, 4);
+
+        Console.Write(CheckLength("Actors: " + actors));
+
+        Console.SetCursorPosition(1, 9);
+
+        Console.Write(CheckLength("My rating: " + rating + " | Viewed: " + YesNo));
+
+        Console.SetCursorPosition(1, 10);
+
+        Console.Write(CheckLength("My comment: " + comment));
+    }
+
+
+
+    private String CheckLength(String str)
+    {
+        if (str.Length > Menu.WidthArea)
+        {
+            int cut = str.Length - Menu.WidthArea;
+            str = str.Substring(0, str.Length - cut);
+            str += "...";
+        }
+
+        return str;
+    }
+
+    public override String ToString()
     {
         String str;
 
@@ -154,7 +208,7 @@ public class Movie
             str = "[" + year + "]" + " | " + title;
         }
 
-        if(str.Length > Menu.WidthArea)
+        if (str.Length > Menu.WidthArea)
         {
             int cut = str.Length - Menu.WidthArea + 3;
             str = str.Substring(0, str.Length - cut);
