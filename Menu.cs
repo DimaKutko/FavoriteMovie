@@ -211,7 +211,7 @@ public static class Menu {
     private static void EditMovie(Movie movie)
     {
         Message("Edit comment[C] | Edit viewed[V] | Exit[Esc]");
-        PrintInMenu("Select");
+        PrintInMenu("Select C | V | Esc");
 
         bool run = true;
         while (run)
