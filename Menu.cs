@@ -4,16 +4,14 @@ using System.Collections.Generic;
 public static class Menu {
 
     private static readonly String item1 = "Add movie";
-    private static readonly String item2 = "Edit movie";
-    private static readonly String item3 = "Delete movie";
-    private static readonly String item4 = "Print my movie";
-
+    private static readonly String item2 = "Print my movie";
+    private static readonly String item3 = "Sort movie";
     private static readonly String error = "ERROR";
 
     private static readonly int width = 70, height = 13;
 
 
-    private static readonly List<String> masMenu = new List<string>(){ item1, item2, item3, item4 };
+    private static readonly List<String> masMenu = new List<string>(){ item1, item2, item3};
 
     public static int Size { get => masMenu.Count; }
 
@@ -98,7 +96,7 @@ public static class Menu {
         }
     }
 
-    public static Movie Item0()
+    public static Movie Item1()
     {
         CleanMessage();
 
@@ -171,9 +169,11 @@ public static class Menu {
         return null;
     }
 
-    public static void Item3(MovieList list)
+    public static void Item2(MovieList list)
     {
-        
+        int select = list.Selector();
+
+        ToContinue($"SELETED {select}");
     }
     
     public static void ToContinue(String message) {
@@ -259,7 +259,7 @@ public static class Menu {
                     break;
                 case ConsoleKey.S:
                 case ConsoleKey.DownArrow:
-                    if (Console.CursorTop != size)
+                  if (Console.CursorTop != size)
                     {
                         PrintSpace();
                         Console.SetCursorPosition(1, Console.CursorTop + 1);

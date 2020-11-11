@@ -24,14 +24,14 @@ namespace FavoriteMovie
                 {
                     case 0:
                         {
-                            var movie = Menu.Item0();
+                            var movie = Menu.Item1();
 
                             if(movie != null) myMovie.Add(movie);
                         }
                         break;
-                    case 3:
+                    case 1:
                         {
-                            
+                            Menu.Item2(myMovie);
                         }
                         break;
                     case -1:

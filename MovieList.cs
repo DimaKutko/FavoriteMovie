@@ -59,68 +59,83 @@ public class MovieList : IEnumerable
         list.Remove(movie);
     }
 
-    //public void Selector()
-    //{
-    //    bool run = true;
-    //    int masTop = 0, masBottom;
+    public int Selector()
+    {
+        int select = 0, masTop = 0, masBottom = -1;
 
-    //    if (list.Count >= 10)
-    //    {
-    //        masBottom = 10;
-    //    }
-    //    else
-    //    {
-    //        masBottom = list.Count;
-    //    }
+        bool run = true;
 
+        if (list.Count >= 10) masBottom = 10; else masBottom = list.Count;
 
-    //    Menu.Message(@"UP[W, Up Arrow] | Down[S, Down Arrow] | Enter[Enter] | Exit[Esc]");
-    //    Console.SetCursorPosition(4, 1);
-    //    Menu.PrintArrow();
-    //    while (run)
-    //    {
-    //        Menu.CleanArea();
+        
+        Console.SetCursorPosition(1, 1);
+        Menu.PrintArrow();
 
-    //        int cursorTop = Console.CursorTop;
-    //        int cursorLeft = Console.CursorLeft;
+        while (run)
+        {
+            
+            int cursorTop = Console.CursorTop, cursorLeft = Console.CursorLeft;
+            Menu.CleanArea();
+            for (int i = masTop, _cursorTop = 1; i < masBottom; i++, _cursorTop++)
+            {
+                Console.SetCursorPosition(4, _cursorTop);
+                Console.Write(list[i]);
+            }
 
-    //        for (int i = masTop, _cursorTop = 1; i < masBottom; i++, _cursorTop++)
-    //        {
-    //            Console.SetCursorPosition(4, _cursorTop);
+            Console.CursorTop = cursorTop; Console.CursorLeft = cursorLeft;
+            Menu.PrintArrow();
 
-    //            Console.Write(list[i]);
-    //        }
+            switch (Console.ReadKey().Key)
+            {
+                case ConsoleKey.W:
+                case ConsoleKey.UpArrow:
+                    if (Console.CursorTop != 1)
+                    {
+                        Menu.PrintSpace();
+                        Console.SetCursorPosition(1, Console.CursorTop - 1);
+                        Menu.PrintArrow();
+                    }
+                    else if (masTop != 0)
+                    {
+                        masTop--;
+                        masBottom--;
+                    }
+                    else
+                    {
+                        Console.SetCursorPosition(1, Console.CursorTop);
+                        Menu.PrintArrow();
+                    }
+                    break;
+                case ConsoleKey.S:
+                case ConsoleKey.DownArrow:
+                    if(Console.CursorTop != list.Count && Console.CursorTop < 10)
+                    {
+                        Menu.PrintSpace();
+                        Console.SetCursorPosition(1, Console.CursorTop + 1);
+                        Menu.PrintArrow();
+                    }
+                    else if(masBottom < list.Count)
+                    {
+                        masBottom++;
+                        masTop++;
+                    }
+                    else
+                    {
+                        Console.SetCursorPosition(1, Console.CursorTop);
+                        Menu.PrintArrow();
+                    }
+                    break;
+                case ConsoleKey.Enter:
+                    select = Console.CursorTop;
+                    run = false;
+                    break;
+                case ConsoleKey.Escape:
+                    select = 0;
+                    run = false;
+                    break;
+            }
+        }
 
-    //        Console.CursorTop = cursorTop;
-    //        Console.CursorLeft = cursorLeft;
-
-    //        switch (Console.ReadKey().Key)
-    //        {
-    //            case ConsoleKey.W:
-    //            case ConsoleKey.UpArrow:
-    //                if(Console.CursorTop != 1)
-    //                {
-    //                    Menu.PrintSpace();
-    //                    Console.SetCursorPosition(1, Console.CursorTop - 1);
-    //                    Menu.PrintArrow();
-    //                }else if (masTop != 0)
-    //                {
-    //                    masTop--;
-    //                    masBottom--;
-    //                }
-    //                else
-    //                {
-    //                    Console.SetCursorPosition(1, Console.CursorTop);
-    //                    Menu.PrintArrow();
-    //                }
-    //                break;
-    //            case ConsoleKey.S:
-    //            case ConsoleKey.DownArrow:
-    //                //if (Console.CursorTop != 11)
-    //                    break;
-    //            default:
-    //                break;
-    //        }
-    //    }
-    //}
+        return select - 1;
+    }
 }
